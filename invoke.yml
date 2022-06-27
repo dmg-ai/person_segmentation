@@ -1,0 +1,48 @@
+segmentation_model:
+  name: smptrainer
+  setup:
+      train: true
+      test: true
+      inference: true
+  save_torchscript: false
+  save_onnx: true
+  use_augmentations: false
+  score_name: "IoU_Score"
+  dataset_path: "data/"
+  weights : "experiments/exp1/weights/best_model.onnx" #'experiments/exp1/weights/best_model_30ep.pt' - initial weights path (path or false)
+  num_epochs: 50 # train epochs number
+  batch_size: 16  # total batch_size for all GPUs
+  resize_shape: [256, 256]  # must be a list
+  device: "cuda:1"  # cpu or cuda device number i.e. "cpu" or "0" or "0,1"
+  workers: 8  # max number of dataloader workers
+  tresholds:
+    iou: 0.5
+    class_probability: 0.5
+  model:
+    name : UnetPlusPlus
+    params:
+      encoder_name : 'resnet18' #'timm-mobilenetv3_large_075' # #'resnet18'
+      encoder_weights: "imagenet"
+      classes : 1
+      #activation : None
+      encoder_depth : 4
+      decoder_channels : [128, 64, 32, 16]
+  optimizer: 
+    name: Adam
+    params:
+      lr: 0.0001 # learning rate for optimizer
+  loss: 
+    name: SoftBCEWithLogitsLoss
+    params:
+        ignore_index: -100
+        reduction: mean
+  scheduler:
+    name: "ReduceLROnPlateau"
+    params:
+        mode: min
+  wandb:
+    logging : true
+    project_name : "human_segmentation"
+    run_name : "UNetPlusPlus" #"EfficientNet_pretrained"
+    team_name : "cv-itmo"
+    model_name : "UNetPlusPlus" # "EfficientNet_pretrained"

@@ -26,9 +26,9 @@ Alpha = in_image[:,:,3]
 Пример изображения и маски:
 
 <p align="middle">
-  <img src="docs/image.jpg" />
-  <img src="docs/orig_mask.jpg" />
-  <img src="docs/mask.jpg" /> 
+  <img src="docs/image.JPG" />
+  <img src="docs/orig_mask.JPG" />
+  <img src="docs/mask.JPG" /> 
 </p>
 
 

@@ -1,3 +1,16 @@
 *.pt
 .ipynb_checkpoints
 __pycache__
+.vscode
+
+clip_img
+matting
+train
+test
+val
+experiments/exp*
+
+*.pt
+*.pth
+*.h5
+*.onnx

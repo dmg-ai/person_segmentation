@@ -19,8 +19,12 @@ class CustomImageDataset(Dataset):
         self.img_dir = path_to_img
         self.mask_dir = path_to_mask
 
-        self.images = [i for i in sorted(os.listdir(path_to_img)) if i.endswith(".jpg")]
-        self.masks = [i for i in sorted(os.listdir(path_to_mask)) if i.endswith(".png")]
+        self.images = [
+            i for i in sorted(os.listdir(path_to_img)) if i.endswith(".jpg")
+        ][:50]
+        self.masks = [
+            i for i in sorted(os.listdir(path_to_mask)) if i.endswith(".png")
+        ][:50]
 
         self.transform = transform
         self.resize_shape = tuple(resize_shape)
@@ -36,7 +40,7 @@ class CustomImageDataset(Dataset):
         image = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
 
         if self.num_classes < 3:
-            mask = cv2.imread(mask_path, cv2.IMREAD_UNCHANGED)[:,:,3]
+            mask = cv2.imread(mask_path, cv2.IMREAD_UNCHANGED)[:, :, 3]
         else:
             mask = cv2.cvtColor(
                 cv2.imread(mask_path),

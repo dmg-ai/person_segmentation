@@ -4,6 +4,13 @@
 
 Данный репозиторий содержит код обучения и инференса модели сегментации человека на изображении/видео.
 
+## MLOps схема
+
+<p align="middle">
+  <img src="docs/new.png" width=270 height=350 />
+</p>
+
+
 ## Dataset
 
 В качестве датасета был взять один из самых больших наборов данных с портретными изображениями - [AISegment.com - Matting Human Datasets]( https://www.kaggle.com/datasets/laurentmih/aisegmentcom-matting-human-datasets).

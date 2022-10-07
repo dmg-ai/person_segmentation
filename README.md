@@ -6,10 +6,7 @@
 
 ## MLOps схема
 
-<p align="middle">
-  <img src="docs/new.png" width=270 height=350 />
-</p>
-
+![image](docs/new.png)
 
 ## Dataset
 

@@ -1,8 +1,10 @@
 name: Publish on Docker Hub and Deploy
 
 on:
-  release:
-    types: [published]
+  pull_request:
+  push:
+    branches:
+      - develop
   # Запуск только при публиковании нового релиза
 
 jobs:

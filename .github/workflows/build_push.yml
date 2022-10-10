@@ -40,3 +40,6 @@ jobs:
       - uses: actions/checkout@master
       - name: Build image
         run: docker build -t ${LOGIN/$NAME}:version1 -f Dockerfile .
+      - name: Push image to docker.io
+        # Пушим образ в registry
+        run: docker push $LOGIN/$NAME:version1

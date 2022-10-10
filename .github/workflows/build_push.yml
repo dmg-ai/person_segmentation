@@ -39,4 +39,4 @@ jobs:
         run: echo $PASSWORD | docker login -u $LOGIN --password-stdin
       - uses: actions/checkout@master
       - name: Build image
-        run: docker build -t ${LOGIN/$NAME}:version1 -f Dockerfile .
+        run: docker build -t ${LOGIN/$NAME}:tagname -f Dockerfile .

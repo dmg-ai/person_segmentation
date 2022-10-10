@@ -31,12 +31,12 @@ jobs:
     needs: [run_tests]
     runs-on: [ubuntu-latest]
     env:
-      LOGIN: ${{ secrets.DOCKER_LOG }}
+      LOGIN: ${{ secrets.DOCKER_LOGIN }}
       NAME: ${{ secrets.DOCKER_NAME }}
-      PASSWORD: ${{ secrets.PASSWORD }}
+      PASSWORD: ${{ secrets.DOCKER_PWD }}
     steps:
       - name: Login to docker.io
         run: echo $PASSWORD | docker login -u $LOGIN --password-stdin
       - uses: actions/checkout@master
       - name: Build image
-        run: docker build -t ${LOGIN/$NAME}:tagname -f Dockerfile .
+        run: docker build -t ${LOGIN/$NAME}:version1 -f Dockerfile .

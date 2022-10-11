@@ -39,7 +39,7 @@ jobs:
         run: echo $PASSWORD | docker login -u $LOGIN --password-stdin
       - uses: actions/checkout@master
       - name: Build image
-        run: docker build -t ${LOGIN/$NAME}:version1 -f Dockerfile .
+        run: docker build -t ${LOGIN/$NAME}:${GITHUB_REF:11} -f Dockerfile .
       - name: Push image to docker.io
         # Пушим образ в registry
-        run: docker push $LOGIN/$NAME:version1
+        run: docker push $LOGIN/$NAME:${GITHUB_REF:11}

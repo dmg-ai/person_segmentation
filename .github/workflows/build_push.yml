@@ -1,12 +1,15 @@
 name: Publish on Docker Hub and Deploy
 
-on:
-  pull_request:
-  push:
-    branches:
-      - develop
+# on:
+#   pull_request:
+#   push:
+#     branches:
+#       - develop
   # Запуск только при публиковании нового релиза
-
+on:
+  release:
+    types: [published]
+    
 jobs:
   run_tests:
     # Первую джобу смело можем копипастить из экшена для тестирования

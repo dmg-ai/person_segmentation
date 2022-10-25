@@ -1,0 +1,82 @@
+# trainer type
+name: smptrainer
+  
+setup: {    
+        train: True,
+        test: True,
+        inference: True
+        }
+
+# inference
+checkpoint_weights: /Users/dmitry/Desktop/person_segmentation/experiments/exp1/weights/best_model.onnx
+
+# tensorboard logging
+logging: True
+
+# data processing
+dataset_name_default: raw_data_short
+dataset_path: data
+raw_images_path: clip_img
+raw_masks_path: matting
+use_augmentations: False
+resize_shape: [256, 256]
+
+# clearml info
+project_name: person_segmentation
+raw_dataset_name: raw_data_short
+raw_dataset_id: 5977be920e564ce388e416d743816736
+prepared_dataset_name: prepared_data_short
+prepared_dataset_id: 0b9c9555e8784efc8499277f7d4662d4
+load_prepared_data: False
+
+# training setup
+num_epochs: 4
+batch_size: 16
+device: cuda:1
+
+# score function
+score_name: IoU_Score
+iou_treshold: 0.5
+
+# model config
+model_name: UnetPlusPlus
+model_params: {      
+                encoder_name : 'resnet18', #'timm-mobilenetv3_large_075' # #'resnet18'
+                encoder_weights: "imagenet",
+                classes : 1,
+                #activation : None
+                encoder_depth : 4,
+                decoder_channels : [128, 64, 32, 16]
+              }
+class_probability: 0.5
+
+# optimizer
+optimizer_name: Adam
+optimizer_params: {lr: 0.0001}
+
+# criterion
+loss_name: SoftBCEWithLogitsLoss
+loss_params: {
+              ignore_index: -100,
+              reduction: mean
+             }
+
+# scheduler
+scheduler_name: ReduceLROnPlateau
+scheduler_params: {mode: min}
+
+# model formats
+save_onnx: True
+
+# pipeline run
+pipe_name: Training pipeline
+pipe_version: "0.0.1"
+pipe_local: True
+
+# trigger
+scheduler_task_id: 5aa2fcd579e149e5ad041d9148330a38 # train task id
+scheduler_queue: default
+scheduler_minute: 30 # run every saturday at 8:30
+scheduler_hour: 8
+scheduler_day: 0
+scheduler_weekdays: ['saturday']
